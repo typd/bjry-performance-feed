@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import datetime
 from urllib.parse import urljoin
 
