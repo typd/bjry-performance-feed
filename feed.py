@@ -29,7 +29,12 @@ def feed():
 def get_performance_list():
     url = 'http://www.bjry.com/bjry/yczx/ycxx/index.shtml'
     base = 'http://www.bjry.com/'
-    bs = requests.get(url).content
+    bs = None
+    try:
+        bs = requests.get(url, timeout=5).content
+    except:
+        print('fail to access {}'.format(url))
+        return []
     html = bs.decode('gb2312')
     soup = BeautifulSoup(html)
     ul = soup.find(id="ycxx_disnone")
