@@ -1,7 +1,17 @@
 #!/usr/bin/env python3
+"""
+Usage:
+  feed.py [-p=<port>]
+  feed.py -h
+
+Options:
+  -p=<port>  port [default: 80]
+  -h --help  show this
+"""
 import datetime
 from urllib.parse import urljoin
 
+from docopt import docopt
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -57,5 +67,6 @@ def get_middle(str, start, end):
     return str[start_index + len(start):start_index + len(start) + end_index]
 
 if __name__ == '__main__':
+    args = docopt(__doc__)
     app.debug = True
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=int(args['-p'] or 80))
